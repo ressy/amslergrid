@@ -1,0 +1,63 @@
+html
+{
+	height: 100%;
+	width: 100%;
+}
+
+body
+{
+	padding: 0;
+	margin: 0;
+	height: 100%;
+	overflow: hidden;
+}
+
+#amsler_grid
+{
+	width: 100%;
+	height: 100%;
+}
+
+/* Hidden by default, then shown with javascript.
+ * (If javascript isn't available, it shouldn't
+ * show up anyway.) */
+#amsler_options
+{
+	display: none;
+	position: absolute;
+	right: 0;
+	top: 0;
+	padding: 30px;
+}
+
+#amsler_options form
+{
+	padding: 10px;
+	border: 1px solid black;
+	background: #ffffff;
+	box-shadow: 5px 5px 20px;
+}
+
+#amsler_options form ul
+{
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+}
+
+#amsler_options form li
+{
+	margin: 20px 0;
+	text-align: center;
+}
+
+#amsler_options button, label
+{
+	font-size: 150%;
+}
+
+#amsler_options label
+{
+	display: block;
+	margin-bottom: 6px;
+}
