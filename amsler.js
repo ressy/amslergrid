@@ -1,12 +1,11 @@
 //------ Setup
 
-var opts, form, svg;
+var opts, form;
 
 $(document).ready(function()
 {
 	opts = $("#amsler_options");
 	form = $("#amsler_options form");
-	svg  = $("#amsler_grid")[0].contentDocument;
 
 	opts.show();
 	$("#amsler_options #fullscreen").click(function(){
@@ -34,6 +33,7 @@ $(document).ready(function()
 
 function amsler_resize(value)
 {
+	var svg = $("#amsler_grid")[0].contentDocument;
 	var size = value*1.0+20;
 	var radius = value*0.2+5;
 	$("pattern", svg).attr("width", size); 
@@ -63,13 +63,15 @@ function opts_mouseout()
 
 function squareSize()
 {
-  var size = $("pattern", svg).attr("width"); // grid box size, specified in svg file
-  return Math.round(size);
+	var svg = $("#amsler_grid")[0].contentDocument;
+	var size = $("pattern", svg).attr("width"); // grid box size, specified in svg file
+	return Math.round(size);
 }
 
 // Flip colors for black-on-white or white-on-black grid
 function invertColor()
 {
+	var svg = $("#amsler_grid")[0].contentDocument;
 	var rect = $("pattern rect", svg);
 	var circ = $("circle", svg);
 	var lines = $("line", svg);
