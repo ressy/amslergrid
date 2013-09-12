@@ -1,13 +1,23 @@
+// http://devlicio.us/blogs/sergio_pereira/archive/2009/02/09/javascript-5-ways-to-call-a-function.aspx
+// http://stackoverflow.com/questions/6486307/default-argument-values-in-javascript-functions
+// https://github.com/kayahr/jquery-fullscreen-plugin
+// Keyboard shortcuts?
+//    - fullscreen
+//    - flip color
+//    - scale grid
+
 //------ Setup
 
 var opts, form;
 
 $(document).ready(function()
 {
+	// Find the options div and contained form element, as they're shared
+	// across these functions
 	opts = $("#amsler_options");
 	form = $("#amsler_options form");
 
-	opts.show();
+	// Set up the event handlers, then reveal the options div
 	$("#amsler_options #fullscreen").click(function(){
 		fullscreenToggle();
 		return(false);
@@ -24,13 +34,17 @@ $(document).ready(function()
 			amsler_resize(ui.value);
 		}
 	});
+	opts.show();
 
+	// Set up the mousein/mouseout functionality, and start the delayed
+	// fade function manually so the options fade by default
 	opts.hover(opts_mousein, opts_mouseout);
 	opts_mouseout();
 });
 
 //------ Functions
 
+// Scale the grid display by a given factor (expects 1 - 100).
 function amsler_resize(value)
 {
 	var svg = $("#amsler_grid")[0].contentDocument;
@@ -45,27 +59,22 @@ function amsler_resize(value)
 	$("circle", svg).attr("r", radius); 
 }
 
+// Bring back the options form
 function opts_mousein()
 {
-	form.stop(true, true);
-	form.show();
-	opts.css("width", "");
-	opts.css("height", "");
+	form.stop(true, true);  // Stop all animation
+	form.show();            // Immediately show the form
+	opts.css("width", "");  // Reset container width
+	opts.css("height", ""); // Reset container height
 }
 
+// Fade the options form away, after a delay
 function opts_mouseout()
 {
-	form.stop(true, true);
-	opts.css("width", opts.width());
-	opts.css("height", opts.height());
-	form.delay(800).fadeOut(2600);
-}
-
-function squareSize()
-{
-	var svg = $("#amsler_grid")[0].contentDocument;
-	var size = $("pattern", svg).attr("width"); // grid box size, specified in svg file
-	return Math.round(size);
+	form.stop(true, true);             // Stop all animation
+	opts.css("width", opts.width());   // Preserve form width
+	opts.css("height", opts.height()); // Preserve form height
+	form.delay(800).fadeOut(2600);     // Delay, then fade
 }
 
 // Flip colors for black-on-white or white-on-black grid
@@ -89,52 +98,49 @@ function invertColor()
 	}
 }
 
-// Notice the way the second answer in the first link uses ||'s -- I should do that
+// All the fullscreen stuff.  Why can't the browsers just agree?
 // http://stackoverflow.com/questions/1125084/how-to-make-in-javascript-full-screen-windows-stretching-all-over-the-screen
 // http://hacks.mozilla.org/2012/01/using-the-fullscreen-api-in-web-browsers/
 // http://dvcs.w3.org/hg/fullscreen/raw-file/tip/Overview.html
+
+// Toggle fullscreen mode on and off
 function fullscreenToggle()
 {
 	if (fullscreenState())
-	{
-		if (document.cancelFullScreen) {
-			document.cancelFullScreen();
-		}
-		else if (document.mozCancelFullScreen) {
-			document.mozCancelFullScreen();
-		}
-		else if (document.webkitCancelFullScreen) {
-			document.webkitCancelFullScreen();
-		}
-	}
+		cancelFullscreen();
 	else
-	{
-		var doc = document.documentElement;
-		if (doc.requestFullscreen) {
-			    doc.requestFullscreen();
-		}
-		else if (doc.mozRequestFullScreen) {
-			    doc.mozRequestFullScreen();
-		}
-		else if (doc.webkitRequestFullScreen) {
-			    doc.webkitRequestFullScreen();
-		}
-	}
-
+		goFullscreen();
 }
 
+// Enter fullscreen mode
+function goFullscreen()
+{
+	var doc = document.documentElement;
+	var method = doc.requestFullscreen ||
+		doc.mozRequestFullScreen ||
+		doc.webkitRequestFullScreen;
+	method.call(doc);
+}
+
+// Leave fullscreen mode
+function cancelFullscreen()
+{
+	var d = document;
+	var cancel = d.cancelFullScreen ||
+		d.mozCancelFullScreen ||
+		d.webkitCancelFullScreen;
+	cancel.call(d);
+}
+
+// Return true if fullscreen is currently in effect, false if it isn't, and 
+// null if it can't be determined or isn't supported at all.
 function fullscreenState()
 {
 	if (!(document.fullscreen === undefined))
-	{
 		return document.fullscreen;
-	}
 	if (!(document.mozFullScreen === undefined))
-	{
 		return document.mozFullScreen;
-	}
 	if (!(document.webkitIsFullScreen === undefined))
-	{
 		return document.webkitIsFullScreen;
-	}
+	return null;
 }
