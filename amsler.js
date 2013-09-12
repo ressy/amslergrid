@@ -1,11 +1,3 @@
-// http://devlicio.us/blogs/sergio_pereira/archive/2009/02/09/javascript-5-ways-to-call-a-function.aspx
-// http://stackoverflow.com/questions/6486307/default-argument-values-in-javascript-functions
-// https://github.com/kayahr/jquery-fullscreen-plugin
-// Keyboard shortcuts?
-//    - fullscreen
-//    - flip color
-//    - scale grid
-
 //------ Setup
 
 var opts, form;
