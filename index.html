@@ -10,7 +10,6 @@
   <link rel="stylesheet" href="amsler.css">
   <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/themes/base/jquery-ui.css">
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js"></script>
   <script src="//www.google-analytics.com/ga.js"></script>
   <script src="/ga.js"></script>
   <script src="amsler.js"></script>
@@ -22,7 +21,11 @@
       <ul>
         <li><button type="button" id="fullscreen">Full Screen</button></li>
         <li><button type="button" id="invert_color">Invert Color</button></li>
-        <li><label>Grid Size:</label><div id="amsler_size"></div></li>
+        <!--
+        http://demosthenes.info/blog/757/Playing-With-The-HTML5-range-Slider-Input
+        http://tutorialzine.com/2011/12/what-you-need-to-know-html5-range-input/
+        -->
+        <li><label for="amsler_size">Grid Size:</label><input id="amsler_size" type="range" min="1" max="100" step="1" value="5"></li>
       </ul>
     </form>
   </div>

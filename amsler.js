@@ -18,14 +18,7 @@ $(document).ready(function()
 		invertColor();
 		return(false);
 		});
-	$("#amsler_size").slider({
-		value: 5,
-		min: 1,
-		max: 100,
-		slide: function( event, ui ) {
-			amsler_resize(ui.value);
-		}
-	});
+	$("#amsler_options #amsler_size").change(function() {amsler_resize(this.value)});
 	opts.show();
 
 	// Set up the mousein/mouseout functionality, and start the delayed
