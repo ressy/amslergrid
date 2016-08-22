@@ -28,6 +28,13 @@ bit clunky.
 [SVG]: https://www.w3.org/Graphics/SVG/
 [jQuery]: https://jquery.com/
 
+## License
+
+This work is licensed under the [GNU Affero General Public License][AGPL] to
+ensure it remains freely available.
+
+[AGPL]: https://www.gnu.org/licenses/agpl.html
+
 ## Other Grids
 
  * <http://www.eyesight.org/Macular_Degeneration/Eye_Test/eye_test.html>
